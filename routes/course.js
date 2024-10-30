@@ -1,4 +1,5 @@
 const {Router} =require("express")
+const{purchaseModel}=require('../models/purchase.model.js')
 
 const courseRouter=Router();
 

@@ -1,4 +1,5 @@
 const {Router} =require("express")
+const{userModel}=require("../models/user.model.js")
 
 const userRouter=Router();
 

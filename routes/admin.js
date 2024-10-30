@@ -1,4 +1,6 @@
 const {Router} =require("express")
+const {adminModel,courseModel}=require("../models/admin.model.js")
+
 
 const adminRouter=Router();
 
