@@ -81,20 +81,51 @@ adminRouter.post('/signin' ,async (req,res) => {
 })
 
 adminRouter.post("/course",adminVerify, async (req,res) =>{
+    const adminId=req.adminId
 
-    const admin= await adminModel.findById({_id:req.adminId})
-    res.json({
-        msg:admin.lastName
+    const {title,description,price,imageUrls}=req.body;
+
+    const course=await courseModel.create({
+        title,
+        description,
+        price,
+        imageUrls,
+        creatorId:adminId
     })
+
+    if(course){
+        res.json({
+            msg:"course created successfully",
+            id:course._id
+        })
+    }
 })
 
 
 
-adminRouter.put("/course", (req,res) =>{
+adminRouter.put("/course",adminVerify, async(req,res) =>{
 
-    res.json({
-        msg:"update course endpoint"
+    const adminId=req.adminId
+
+    const {title,description,price,imageUrls}=req.body;
+    const course=await courseModel.findById(adminId);
+    console.log(course._id);
+    const courseId=course._id
+
+    const updatedCourse=await courseModel.findByIdAndUpdate(courseId,{
+        title,
+        description,
+        price,
+        imageUrls,
+        creatorId:adminId
     })
+
+    if(course){
+        res.json({
+            msg:"course updated successfully",
+            id:course._id
+        })
+    }
 })
 
 
